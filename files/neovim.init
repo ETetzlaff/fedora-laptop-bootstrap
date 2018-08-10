@@ -10,46 +10,31 @@ call dein#add('Shougo/dein.vim')
 " </Required>
 
 " Plugins
-call dein#add('robbles/logstash.vim')
-call dein#add('diepm/vim-rest-console')
-call dein#add('Shougo/neosnippet.vim')
-call dein#add('Shougo/neosnippet-snippets')
-call dein#add('SirVer/ultisnips')
-call dein#add('honza/vim-snippets')
-call dein#add('tpope/vim-fugitive')
-call dein#add('jpo/vim-railscasts-theme')
-call dein#add('morhetz/gruvbox')
-call dein#add('bling/vim-airline')
-call dein#add('vim-airline/vim-airline-themes')
-call dein#add('scrooloose/nerdtree.git')
-call dein#add('ryanoasis/vim-devicons')
+call dein#add('flazz/vim-colorschemes')
 call dein#add('christoomey/vim-tmux-navigator')
+call dein#add('honza/vim-snippets')
+call dein#add('slim-template/vim-slim')
+call dein#add('bronson/vim-trailing-whitespace')
+call dein#add('Raimondi/delimitMate')
 call dein#add('ctrlpvim/ctrlp.vim')
-call dein#add('rking/ag.vim')
-call dein#add('slim-template/vim-slim.git')
-call dein#add('tpope/vim-sleuth.git')
-call dein#add('tpope/vim-surround.git')
 call dein#add('tpope/vim-rails')
-call dein#add('tpope/vim-commentary')
-call dein#add('tpope/vim-unimpaired')
-call dein#add('tpope/vim-haml')
-call dein#add('tpope/vim-endwise')
-call dein#add('dbakker/vim-projectroot')
-call dein#add('christoomey/vim-tmux-runner')
-call dein#add('thoughtbot/vim-rspec')
-call dein#add('janko-m/vim-test')
-call dein#add('kana/vim-textobj-user')
-call dein#add('nelstrom/vim-textobj-rubyblock')
 call dein#add('vim-ruby/vim-ruby')
-call dein#add('tpope/vim-projectionist')
-call dein#add('Lokaltog/vim-easymotion')
-call dein#add('sjl/gundo.vim')
-call dein#add('Shougo/vimshell')
+call dein#add('ddollar/nerdcommenter')
+call dein#add('scrooloose/syntastic.git')
+call dein#add('scrooloose/nerdtree.git')
+call dein#add('airblade/vim-gitgutter')
+call dein#add('tpope/vim-fugitive')
+call dein#add('vim-airline/vim-airline')
+call dein#add('ryanoasis/vim-devicons')
+call dein#add('janko-m/vim-test')
+call dein#add('robbles/logstash')
 call dein#add('fatih/vim-go')
-call dein#add('jelera/vim-javascript-syntax')
 call dein#add('pangloss/vim-javascript')
-call dein#add('nathanaelkane/vim-indent-guides')
-call dein#add('mxw/vim-jsx')
+call dein#add('isRuslan/vim-es6')
+call dein#add('diepm/vim-rest-console')
+call dein#add('easymotion/vim-easymotion')
+call dein#add('SirVer/ultisnips')
+call dein#add('ervandew/supertab')
 
 " <Required>
 call dein#end()
@@ -69,9 +54,10 @@ set ignorecase
 set nobackup
 set nowritebackup
 set noswapfile
+set nowrap
 set shiftround
 set expandtab
-set diffopt=vertical 
+set diffopt=vertical
 set clipboard=unnamed
 set background=dark
 colorscheme gruvbox
@@ -98,46 +84,25 @@ let g:rspec_command = "call VtrSendCommand('rspec {spec}')"
 
 " Leader Mappings
 let mapleader = ","
-nnoremap <leader><space> :noh<CR>
 nnoremap <leader>gs :Gstatus<CR>
+nnoremap <leader>gb :Gblame<CR>
+nnoremap <leader>gd :Gdiff<CR>
 nnoremap <leader>n :NERDTree<CR>
 nnoremap <leader>w :w<CR>
 nnoremap <leader>q :q<CR>
-nnoremap <Leader>c :set cursorline!<CR>
-nnoremap <leader>- :wincmd _<cr>:wincmd \|<cr>
-nnoremap <leader>= :wincmd =<cr>
-cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<cr>
-map <leader>ew :e %%
-map <leader>es :sp %%
-map <leader>ev :vsp %%
-map <leader>et :tabe %%
+nnoremap <leader>wq :wq<CR>
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+nnoremap <silent> <BS> :TmuxNavigateLeft<cr>
+nnoremap <leader>gr :GoRun<CR>
+nnoremap <leader>gt :GoTest<CR>
 
-" Ruby / Rails test setup
-let test#strategy = "vtr"
-map <Leader>tf :TestFile<CR>
-map <Leader>tn :TestNearest<CR>
-map <Leader>tl :TestLast<CR>
-map <Leader>ta :TestSuite<CR>
-map <leader>rf :VtrFocusRunner<CR>
-map <leader>sl :VtrSendLinesToRunner<CR>
-map <leader>sf :VtrSendFile<CR>
-map <leader>or :VtrOpenRunner{'orientation': 'h', 'percentage': 50}<CR>
-map <leader>ra :VtrAttachToPane<CR>
-map <leader>rm :VtrSendCommand(make clean all)<CR>
-map <leader>ut :GundoToggle<CR>
-let g:VtrUseVtrMaps = 1
 
 " Golang leader mapings
-au FileType go nmap <leader>gb <Plug>(go-build)
-au FileType go nmap <leader>gt <Plug>(go-test)
-au FileType go nmap <Leader>gdo <Plug>(go-doc)
-au FileType go nmap <Leader>gl :GoLint<CR>
-au FileType go nmap <Leader>gr <Plug>(go-rename)
-au FileType go nmap <Leader>gd :GoDef<CR>
-au FileType go nmap <Leader>gi <Plug>(go-info)
-au FileType go nmap <Leader>ga :GoAlternate!<CR>
-au FileType go nmap <Leader>dec :GoDeclsDir<CR>
-au FileType go nmap <Leader>de :GoDecls<CR>
+nnoremap <leader>gr :GoRun<CR>
+nnoremap <leader>gt :GoTest<CR>
 
 " Vim rest console configs
 let g:vrc_allow_get_request_body = 1
@@ -208,3 +173,5 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 let g:UltiSnipsSnippetDirectories=["UltiSnips", "snips"]
 let g:UltiSnipsSnippetsDir="~/.vim/snips"
 set clipboard+=unnamedplus
+
+com! FormatJSON %!python -m json.tool
